@@ -6,6 +6,8 @@ public class CharacterController : MonoBehaviour
 {
     Vector2 moveVector;
     GameObject sceneCamObj;
+    public SensorData sensorData;
+    float speed = 5;
 
     private int health = 100;
     public int GetHealth() => health;
@@ -18,7 +20,9 @@ public class CharacterController : MonoBehaviour
 
     void Update()
     {
-        moveVector = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+        float moveX = Mathf.Max(Mathf.Min(sensorData.linearAcceleration.y, 9), -9) * speed * Time.deltaTime;
+        float moveY = -Mathf.Max(Mathf.Min(sensorData.linearAcceleration.x, 9), -9) * speed * Time.deltaTime;
+        moveVector = new Vector2(moveX, moveY);
     }
 
     void FixedUpdate()
