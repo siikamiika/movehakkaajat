@@ -30,7 +30,7 @@ public class CharacterController : MonoBehaviour
         Move();
     }
 
-    Vector2 getBoundingBox() {
+    Vector2 getPlayArea() {
         float orthSize = sceneCamObj.GetComponent<Camera>().orthographicSize;
         float height = orthSize;
         float width = orthSize / Screen.height * Screen.width;
@@ -40,7 +40,7 @@ public class CharacterController : MonoBehaviour
     void Move()
     {
         Debug.Log(sceneCamObj.GetComponent<Camera>().orthographicSize);
-        Vector2 dimensions = getBoundingBox();
+        Vector2 dimensions = getPlayArea();
         float xNeg = -dimensions.x;
         float xPos = dimensions.x;
         float yNeg = -dimensions.y;
