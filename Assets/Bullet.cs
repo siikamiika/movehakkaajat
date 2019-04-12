@@ -6,7 +6,7 @@ public class Bullet : MonoBehaviour
 {
     float moveSpeed = 1f;
     float killTimer;
-    float lifeTime = 10f;
+    float lifeTime = 2f;
 
     void Start()
     {

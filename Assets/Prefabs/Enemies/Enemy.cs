@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider col)
     {
-        if (collision.collider.gameObject.tag == "Player")
+        print("collision hit");
+        if (col.gameObject.tag == "Player")
         {
             FindObjectOfType<CharacterController>()?.TakeDamage(10);
             Destroy(gameObject);
         }
-        if( collision.collider.gameObject.tag == "PlayerBullet")
+        if(col.gameObject.tag == "PlayerBullet")
         {
             Destroy(gameObject);
         }
