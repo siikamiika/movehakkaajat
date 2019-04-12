@@ -13,7 +13,7 @@ public class CharacterController : MonoBehaviour
     void Start()
     {
         moveVector = new Vector2(0, 0);
-        sceneCamObj = GameObject.Find("Main Camera");
+        sceneCamObj = Camera.main.gameObject;
     }
 
     void Update()

@@ -9,12 +9,12 @@ public class Enemy : MonoBehaviour
     {
         if (collision.collider.gameObject.tag == "Player")
         {
-            // TODO Player take damage
-            Destroy(this);
+            FindObjectOfType<CharacterController>()?.TakeDamage(10);
+            Destroy(gameObject);
         }
         if( collision.collider.gameObject.tag == "PlayerBullet")
         {
-            Destroy(this);
+            Destroy(gameObject);
         }
     }
 
