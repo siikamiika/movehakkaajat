@@ -7,6 +7,9 @@ public class CharacterController : MonoBehaviour
     Vector2 moveVector;
     GameObject sceneCamObj;
 
+    private int health = 100;
+    public int GetHealth() => health;
+
     void Start()
     {
         moveVector = new Vector2(0, 0);
@@ -48,4 +51,16 @@ public class CharacterController : MonoBehaviour
             transform.Translate(moveDirection);
         }
     }
+
+    public void TakeDamage(int damage)
+    {
+        health -= damage;
+        health = health <= 0 ? 0 : health;
+        if (health == 0)
+        {
+            // die
+        }
+    }
+
+
 }
