@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Movesense Plugin/ExampleScenes/ScanScene.unity
+    path: Assets/Scenes/ScanScene1.unity
     guid: 36a1b9088fe934fae8287df85cac1bca
   - enabled: 0
     path: Assets/Movesense Plugin/ExampleScenes/SubscriptionScene.unity
