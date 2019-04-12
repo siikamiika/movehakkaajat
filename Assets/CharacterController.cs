@@ -39,10 +39,10 @@ public class CharacterController : MonoBehaviour
         float yNeg = -dimensions.y;
         float yPos = dimensions.y;
         if (
-            ((moveVector.x < 0 && transform.position.x > xNeg)) ||
-            (moveVector.x > 0 && transform.position.x < xPos) ||
-            (moveVector.y < 0 && transform.position.z > yNeg) ||
-            (moveVector.y > 0 && transform.position.z < yPos)
+            (moveVector.x >= 0 || (moveVector.x < 0 && transform.position.x > xNeg)) &&
+            (moveVector.x <= 0 || (moveVector.x > 0 && transform.position.x < xPos)) &&
+            (moveVector.y >= 0 || (moveVector.y < 0 && transform.position.z > yNeg)) &&
+            (moveVector.y <= 0 || (moveVector.y > 0 && transform.position.z < yPos))
             ) {
             Vector3 moveDirection = new Vector3(moveVector.x, 0, moveVector.y);
             transform.Translate(moveDirection);
