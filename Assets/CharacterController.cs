@@ -45,15 +45,15 @@ public class CharacterController : MonoBehaviour
         float xPos = dimensions.x;
         float yNeg = -dimensions.y;
         float yPos = dimensions.y;
-        if (
-            (moveVector.x >= 0 || (moveVector.x < 0 && transform.position.x > xNeg)) &&
-            (moveVector.x <= 0 || (moveVector.x > 0 && transform.position.x < xPos)) &&
-            (moveVector.y >= 0 || (moveVector.y < 0 && transform.position.z > yNeg)) &&
-            (moveVector.y <= 0 || (moveVector.y > 0 && transform.position.z < yPos))
-            ) {
-            Vector3 moveDirection = new Vector3(moveVector.x, 0, moveVector.y);
-            transform.Translate(moveDirection);
+        if ((transform.position.x + moveVector.x < xNeg) || (transform.position.x + moveVector.x > xPos)) {
+            moveVector.x = 0;
         }
+        if ((transform.position.z + moveVector.y < yNeg) || (transform.position.z + moveVector.y > yPos))
+        {
+            moveVector.y = 0;
+        }
+        Vector3 moveDirection = new Vector3(moveVector.x, 0, moveVector.y);
+        transform.Translate(moveDirection);
     }
 
     public void TakeDamage(int damage)
