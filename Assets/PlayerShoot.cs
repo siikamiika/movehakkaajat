@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerShoot : MonoBehaviour
 {
     float shootTimer;
-    float shootInterval = 1f;
+    float shootInterval = 0.2f;
     public GameObject bullet;
     GameObject player;
 
