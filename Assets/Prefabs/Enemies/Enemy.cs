@@ -8,7 +8,6 @@ public class Enemy : MonoBehaviour
 
     private void OnTriggerEnter(Collider col)
     {
-        print("collision hit");
         if (col.gameObject.tag == "Player")
         {
             FindObjectOfType<CharacterController>()?.TakeDamage(10);
@@ -16,6 +15,7 @@ public class Enemy : MonoBehaviour
         }
         if(col.gameObject.tag == "PlayerBullet")
         {
+            print("Bullet hit");
             FindObjectOfType<CharacterController>()?.AddScore(score);
             Destroy(gameObject);
         }

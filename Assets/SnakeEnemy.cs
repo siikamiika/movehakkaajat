@@ -33,4 +33,12 @@ public class SnakeEnemy : Enemy
         lastPositions.Insert(0, transform.position);
         transform.Translate(new Vector3((Mathf.Sin(Time.time)) * 0.1f, 0, -2 * Time.deltaTime));
     }
+
+    private void OnDestroy()
+    {
+        foreach(var t in tail)
+        {
+            Destroy(t);
+        }
+    }
 }

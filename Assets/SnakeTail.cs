@@ -13,4 +13,9 @@ public class SnakeTail : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    private void OnDestroy()
+    {
+        Destroy(head);
+    }
 }
