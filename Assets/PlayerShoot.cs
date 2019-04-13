@@ -27,6 +27,6 @@ public class PlayerShoot : MonoBehaviour
 
     void Shoot()
     {
-        Instantiate(bullet, player.transform.position, player.transform.rotation);
+        Instantiate(bullet, player.transform.position, Quaternion.Euler(new Vector3(0, 0, 0)));
     }
 }
