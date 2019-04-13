@@ -12,6 +12,13 @@ public class CharacterController : MonoBehaviour
     private int health = 100;
     public int GetHealth() => health;
 
+    private int score = 0;
+    public int GetScore() => score;
+    public void AddScore(int score)
+    {
+        this.score += score;
+    } 
+
     void Start()
     {
         moveVector = new Vector2(0, 0);
@@ -28,6 +35,7 @@ public class CharacterController : MonoBehaviour
     void FixedUpdate()
     {
         Move();
+        score++;
     }
 
     Vector2 getPlayArea() {
