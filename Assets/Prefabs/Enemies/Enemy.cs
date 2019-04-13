@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    public int score;
+
     private void OnTriggerEnter(Collider col)
     {
         print("collision hit");
@@ -14,6 +16,7 @@ public class Enemy : MonoBehaviour
         }
         if(col.gameObject.tag == "PlayerBullet")
         {
+            FindObjectOfType<CharacterController>()?.AddScore(score);
             Destroy(gameObject);
         }
     }
