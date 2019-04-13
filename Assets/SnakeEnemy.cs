@@ -7,9 +7,11 @@ public class SnakeEnemy : Enemy
     List<Vector3> lastPositions;
     List<GameObject> tail;
     public GameObject tailPiece;
+    float initrandom;
 
     void Start()
     {
+        initrandom = Random.Range(0, 100);
         lastPositions = new List<Vector3>();
         tail = new List<GameObject>();
         for (int i = 0; i < 8; i++)
@@ -31,7 +33,7 @@ public class SnakeEnemy : Enemy
             }
         }
         lastPositions.Insert(0, transform.position);
-        transform.Translate(new Vector3((Mathf.Sin(Time.time)) * 0.1f, 0, -2 * Time.deltaTime));
+        transform.Translate(new Vector3((Mathf.Sin(Time.time*2 + initrandom)) * 0.1f, 0, -5 * Time.deltaTime));
     }
 
     private void OnDestroy()
