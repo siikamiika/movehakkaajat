@@ -8,9 +8,13 @@ public class CharacterController : MonoBehaviour
     GameObject sceneCamObj;
     public SensorData sensorData;
     float speed = 5;
+    public GameObject bullet;
 
     private int health = 100;
     public int GetHealth() => health;
+    private float lastBlastRecharge = 0;
+    private float lastBlast = 0;
+    private int blastCount = 10;
 
     void Start()
     {
@@ -23,6 +27,20 @@ public class CharacterController : MonoBehaviour
         float moveX = Mathf.Max(Mathf.Min(sensorData.linearAcceleration.y, 9), -9) * speed * Time.deltaTime;
         float moveY = -Mathf.Max(Mathf.Min(sensorData.linearAcceleration.x, 9), -9) * speed * Time.deltaTime;
         moveVector = new Vector2(moveX, moveY);
+        // recharge blast
+        if (Time.time - lastBlastRecharge > 1)
+        {
+            lastBlastRecharge = Time.time;
+            if (blastCount < 10)
+            {
+                blastCount += 1;
+            }
+        }
+        // activate blast
+        if (sensorData.linearAcceleration.z > 15)
+        {
+            Blast();
+        }
     }
 
     void FixedUpdate()
@@ -35,6 +53,21 @@ public class CharacterController : MonoBehaviour
         float height = orthSize;
         float width = orthSize / Screen.height * Screen.width;
         return new Vector2(width, height);
+    }
+
+    void Blast()
+    {
+        if (blastCount <= 0 || Time.time - lastBlast < 0.02)
+        {
+            return;
+        }
+        blastCount -= 1;
+        lastBlast = Time.time;
+        for (int i = 0; i <= 50; i++)
+        {
+            float val = 360 / 50 * i;
+            Instantiate(bullet, transform.position, Quaternion.Euler(new Vector3(0, val, 0)));
+        }
     }
 
     void Move()
