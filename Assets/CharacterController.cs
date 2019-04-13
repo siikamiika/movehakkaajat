@@ -39,7 +39,6 @@ public class CharacterController : MonoBehaviour
 
     void Move()
     {
-        Debug.Log(sceneCamObj.GetComponent<Camera>().orthographicSize);
         Vector2 dimensions = getBoundingBox();
         float xNeg = -dimensions.x;
         float xPos = dimensions.x;
