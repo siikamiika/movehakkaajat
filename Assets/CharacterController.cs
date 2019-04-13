@@ -1,9 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class CharacterController : MonoBehaviour
 {
+    public UnityEvent PlayerDiesEvent; 
+
     Vector2 moveVector;
     GameObject sceneCamObj;
     public SensorData sensorData;
@@ -16,6 +19,15 @@ public class CharacterController : MonoBehaviour
     private float lastBlast = 0;
     private int blastCount = 10;
 
+    private int score = 0;
+    public int GetScore() => score;
+    public void AddScore(int score)
+    {
+        this.score += score;
+    }
+
+    private bool playerAlive = true;
+
     void Start()
     {
         moveVector = new Vector2(0, 0);
@@ -24,6 +36,10 @@ public class CharacterController : MonoBehaviour
 
     void Update()
     {
+        if (!playerAlive)
+        {
+            return;
+        }
         float moveX = Mathf.Max(Mathf.Min(sensorData.linearAcceleration.y, 9), -9) * speed * Time.deltaTime;
         float moveY = -Mathf.Max(Mathf.Min(sensorData.linearAcceleration.x, 9), -9) * speed * Time.deltaTime;
         moveVector = new Vector2(moveX, moveY);
@@ -45,7 +61,11 @@ public class CharacterController : MonoBehaviour
 
     void FixedUpdate()
     {
-        Move();
+        if (playerAlive)
+        {
+            Move();
+            score++;
+        }
     }
 
     Vector2 getPlayArea() {
@@ -94,9 +114,17 @@ public class CharacterController : MonoBehaviour
         health = health <= 0 ? 0 : health;
         if (health == 0)
         {
-            // die
+            OnPlayrDies();
         }
     }
 
-
+    void OnPlayrDies()
+    {
+        foreach (Transform child in transform)
+        {
+            Destroy(child.gameObject);
+        }
+        playerAlive = false;
+        PlayerDiesEvent?.Invoke();
+    }
 }
