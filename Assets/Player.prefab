@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sensorData: {fileID: 0}
+  bullet: {fileID: 2173699627081429672, guid: 12b7ae19643a8d87e8abbff6f878fdd9, type: 3}
 --- !u!114 &1214173288
 MonoBehaviour:
   m_ObjectHideFlags: 0
