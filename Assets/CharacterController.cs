@@ -13,12 +13,20 @@ public class CharacterController : MonoBehaviour
     float speed = 5;
     public GameObject bullet;
 
+    // health
     private int health = 100;
     public int GetHealth() => health;
+
+    // blast
     private float lastBlastRecharge = 0;
     private float lastBlast = 0;
     private int blastCount = 10;
 
+    // shoot
+    float shootTimer;
+    float shootInterval = 0.2f;
+
+    // score
     private int score = 0;
     public int GetScore() => score;
     public void AddScore(int score)
@@ -57,6 +65,13 @@ public class CharacterController : MonoBehaviour
         {
             Blast();
         }
+        // shoot
+        shootTimer += Time.deltaTime;
+        if (shootTimer > shootInterval)
+        {
+            shootTimer -= shootInterval;
+            Shoot();
+        }
     }
 
     void FixedUpdate()
@@ -88,6 +103,11 @@ public class CharacterController : MonoBehaviour
             float val = 360 / 50 * i;
             Instantiate(bullet, transform.position, Quaternion.Euler(new Vector3(0, val, 0)));
         }
+    }
+
+    void Shoot()
+    {
+        Instantiate(bullet, transform.position, Quaternion.Euler(new Vector3(0, 0, 0)));
     }
 
     void Move()
